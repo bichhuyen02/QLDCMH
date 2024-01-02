@@ -12,7 +12,10 @@ public class DeCuong {
     private int id;
     private String mucTieu;
     private String chuanDauRa;
+    private HeDaoTao he;
 
+    public DeCuong(){}
+    
     /**
      * @return the id
      */
@@ -53,6 +56,20 @@ public class DeCuong {
      */
     public void setChuanDauRa(String chuanDauRa) {
         this.chuanDauRa = chuanDauRa;
+    }
+
+    /**
+     * @return the he
+     */
+    public HeDaoTao getHe() {
+        return he;
+    }
+
+    /**
+     * @param he the he to set
+     */
+    public void setHe(HeDaoTao he) {
+        this.he = he;
     }
     
 }

@@ -13,9 +13,13 @@ public class HeDaoTao {
     private int id;
     private String ten;
 
-    
     public HeDaoTao(){}
     
+//    public HeDaoTao(String ten){
+//        this.id = 
+//    }
+//    
+//    public int dem()
     /**
      * @return the id
      */

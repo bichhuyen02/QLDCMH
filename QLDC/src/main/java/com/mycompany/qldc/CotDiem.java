@@ -9,5 +9,5 @@ package com.mycompany.qldc;
  * @author Admin
  */
 public class CotDiem {
-    
+    public CotDiem (){}
 }

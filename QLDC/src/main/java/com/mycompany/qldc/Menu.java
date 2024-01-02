@@ -4,6 +4,7 @@
  */
 package com.mycompany.qldc;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -12,8 +13,57 @@ import java.util.Scanner;
  */
 public class Menu {
 
+    MonHoc monhoc;
+    ArrayList<MonHoc> mh = new ArrayList<MonHoc>();
+    ArrayList<DeCuong> dc = new ArrayList<DeCuong>();
+
     private Scanner sc = new Scanner(System.in);
     private int n = 0;
+
+    private void menuLuuMH() {
+        MonHoc m = new MonHoc();
+        System.out.println("com.mycompany.qldc.Menu.menuLuuMH()");
+    }
+
+    private void menuLuuDCCSCQ() {
+        DeCuong c = new DeCuong();
+        String s;
+        System.out.println("Nhap ten hoac ma mon hoc muon tao de cuong: ");
+        s = sc.nextLine();
+        if(monhoc.searchById(s, mh) == true || monhoc.searchByTen(s, mh) == true){
+            int h = 0;System.out.println("-----------------------menu------------------------");
+            System.out.println("1. He chinh quy");
+            System.out.println("2. He tu xa");
+            System.out.println("3. Quay lai");
+            System.out.println("4. Thoat");
+            System.out.println("-----------------------end------------------------");
+            System.out.println("chon he dao tao: ");
+            switch (h) {
+                case 1:
+                    HeDaoTao he = new HeDaoTao();
+                    c.setHe(he);
+                    break;
+                case 2:
+                    menuKhoiKienThucTX();
+                    break;
+                case 3:
+                    menuMain();
+                    break;
+                case 4:
+                    System.out.println("Cam on da su dung");
+                    break;
+                default:
+                    System.out.println("Khong hop le!!!");
+            }
+            
+            System.out.println("Nhap muc tieu mon hoc: ");
+            c.setMucTieu(sc.nextLine());
+            System.out.println("Nhap chuan dau ra mon hoc: ");
+            c.setChuanDauRa(sc.nextLine());
+        }else{
+        System.out.println("Mon hoc khong ton tai!!!");
+        }
+    }
 
     private void menuMonHoc() {
         do {
