@@ -728,12 +728,8 @@ public class Menu {
         System.out.print("Nhap ma mo ta mon hoc: ");
         m.setMoTa(sc.nextLine());
         System.out.print("Nhap so tin chi: ");
-        m.setSoTC(sc.nextFloat());
-        try {
-            qlmh.themMH(m);
-        } catch (ParseException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        m.setSoTC(sc.nextFloat());       
+        qlmh.themMH(m);
         System.out.println("-------------------------end--------------------------");
         System.out.println("Ban tiep tuc them hay quay lai menu mon hoc?");
         System.out.println("1. Tiep tuc");
