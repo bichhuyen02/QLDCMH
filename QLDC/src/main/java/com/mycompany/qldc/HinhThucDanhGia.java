@@ -9,5 +9,8 @@ package com.mycompany.qldc;
  * @author Admin
  */
 public class HinhThucDanhGia {
+    private int ma;
+    private String phuongPDG;
+    private String noiDung;
     public HinhThucDanhGia(){}
 }
