@@ -5,10 +5,7 @@ package com.mycompany.qldc;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  *
@@ -26,6 +23,7 @@ public class QLDC {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
+            
             //Tao hệ đào tạo
             HeDaoTao hdt1 = new HeDaoTao(1, "Chinh quy");
             HeDaoTao hdt2 = new HeDaoTao(2, "Tu xa");

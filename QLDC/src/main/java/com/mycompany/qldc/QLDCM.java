@@ -54,6 +54,24 @@ public class QLDCM {
         return null;
     }
 
+    public DeCuong timDCTheoTenMH(String tuKhoa) {
+        for (DeCuong d : dc) {
+            if (d.getMh().getTen().equals(tuKhoa) == true) {
+                return d;
+            }
+        }
+        return null;
+    }
+
+    public DeCuong timDCTheoTenGV(String tuKhoa) {
+        for (DeCuong d : dc) {
+            if (d.getgV().getTen().equals(tuKhoa) == true) {
+                return d;
+            }
+        }
+        return null;
+    }
+    
     public DeCuong timDCTheoMaGV(String tuKhoa) {
         for (DeCuong d : dc) {
             if (d.getgV().getMaGV().equals(tuKhoa) == true) {
@@ -63,6 +81,25 @@ public class QLDCM {
         return null;
     }
 
+    public int checkGv(GiangVien gv){
+        int i = 0;
+        for (DeCuong d : dc) {
+            if (d.getgV().equals(gv) == true) {
+                i++;
+            }
+        }
+        return i;
+    }
+    
+    public boolean checkMH(MonHoc m, HeDaoTao he){
+        for (DeCuong d : dc) {
+            if (d.getMh().equals(m) == true && d.getHe().equals(he)) {
+               return false;
+            }
+        }
+        return true;
+    }
+    
     /**
      * @return the dc
      */

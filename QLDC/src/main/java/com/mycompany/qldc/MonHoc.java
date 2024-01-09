@@ -4,7 +4,6 @@
  */
 package com.mycompany.qldc;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,36 +19,51 @@ public class MonHoc {
     private List<MonHoc> dstq;
     private List<MonHoc> dstr;
     
-    public MonHoc(){}
-    
-     public MonHoc(String id, String ten, String moTa, float soTC, KhoiKienThuc kt){
-         this.id = id;
-         this.moTa = moTa;
-         this.soTC =  soTC;
-         this.ten = ten;
-         this.kt = kt;
-     }
-     
-     public MonHoc(String id, String ten, String moTa, float soTC, KhoiKienThuc kt, 
-             List<MonHoc> dstq, List<MonHoc> dstr){
-         this.id = id;
-         this.moTa = moTa;
-         this.soTC =  soTC;
-         this.ten = ten;
-         this.kt = kt;
-         this.dstq = dstq;
-         this.dstr = dstr;
-     }
-     
-     public MonHoc (String id, String ten, String moTa, float soTC, KhoiKienThuc kt, List<MonHoc> dstr){
-         this.id = id;
-         this.moTa = moTa;
-         this.soTC =  soTC;
-         this.ten = ten;
-         this.kt = kt;
-         this.dstr = dstr;
-     }
+    public MonHoc() {}
 
+    public MonHoc(String id, String ten, String moTa, float soTC, KhoiKienThuc kt) {
+        this.id = id;
+        this.moTa = moTa;
+        this.soTC = soTC;
+        this.ten = ten;
+        this.kt = kt;
+    }
+
+    public MonHoc(String id, String ten, String moTa, float soTC, KhoiKienThuc kt,
+            List<MonHoc> dstq, List<MonHoc> dstr) {
+        this.id = id;
+        this.moTa = moTa;
+        this.soTC = soTC;
+        this.ten = ten;
+        this.kt = kt;
+        this.dstq = dstq;
+        this.dstr = dstr;
+    }
+
+    public MonHoc(String id, String ten, String moTa, float soTC, KhoiKienThuc kt, 
+            List<MonHoc> dstr) {
+        this.id = id;
+        this.moTa = moTa;
+        this.soTC = soTC;
+        this.ten = ten;
+        this.kt = kt;
+        this.dstr = dstr;
+    }
+
+    public boolean checkList(MonHoc m) {
+        for (MonHoc mon : this.dstq) {
+            if (mon.equals(m) == true) {
+                return true;
+            }
+        }
+        for (MonHoc mon : this.dstr) {
+            if (mon.equals(m) == true) {
+                return true;
+            }
+        }
+        return false;
+    }
+     
     /**
      * @return the id
      */

@@ -21,88 +21,283 @@ public class Menu {
     private Scanner sc = new Scanner(System.in);
     private int n = 0;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    HeDaoTao cq = new HeDaoTao(1, "Chinh quy");
+    HeDaoTao tx = new HeDaoTao(2, "Tu xa");
+    KhoiKienThuc cs = new KhoiKienThuc(1, "Co so");
+    KhoiKienThuc csn = new KhoiKienThuc(2, "Co so nganh");
+    KhoiKienThuc cn = new KhoiKienThuc(3, "Chuyen nganh");
     
     //------------------------------------------Đề cương-------------------------------------------
+    
+    //xóa đề cương
+    private void xoaDc(QLMH qlmh, QLDCM qldc, QLGV qlgv) throws ParseException {
+        String s;
+        DeCuong c = new DeCuong();
+        sc.nextLine();
+        System.out.print("Nhap ten hoac ma cua giang vien / mon hoc của de cuong muon xoa: ");
+        s = sc.nextLine();
+        if (qldc.timDCTheoTenMH(s) != null) {
+            c = qldc.timDCTheoTenMH(s);
+        }
+        if (qldc.timDCTheoMaMH(s) != null) {
+            c = qldc.timDCTheoMaMH(s);
+        }
+        if (qldc.timDCTheoMaGV(s) != null) {
+            c = qldc.timDCTheoMaGV(s);
+        }
+        if (qldc.timDCTheoTenGV(s) != null) {
+            c = qldc.timDCTheoTenGV(s);
+        }
+        if (qldc.timDCTheoMa(s) != null) {
+            c = qldc.timDCTheoMa(s);
+        }
+        if (c != null) {
+            System.out.println("-----------------------De cuong------------------------");
+            System.out.println("Ma de cuong: " + c.getId());
+            System.out.println("Giang vien: " + c.getgV().getTen());
+            System.out.println("He: " + c.getHe().getTen());
+            System.out.println("Muc tieu: " + c.getMucTieu());
+            System.out.println("Chuan dau ra: " + c.getChuanDauRa());
+            System.out.println("-------------------------end--------------------------");
+            System.out.println("Co phai de cuong muon xoa?");
+            System.out.println("1. Xoa");
+            System.out.println("2. Tim lai");
+            System.out.println("3. Quay lai menu de cuong");
+            n = sc.nextInt();
+            switch (n) {
+                case 1:
+                    if (qldc.xoaDC(c) == true) {
+                        System.out.println("Xoa thanh cong!!!");
+                    } else {
+                        System.out.println("Xoa that bai!!!");
+                    }
+                    System.out.println("Ban co muon tiep tuc xoa?");
+                    System.out.println("1. Co");
+                    System.out.println("2. Khong");
+                    n = sc.nextInt();
+                    switch (n) {
+                        case 1:
+                            xoaDc(qlmh, qldc, qlgv);
+                            break;
+                        case 2:
+                            menuDeCuong(qlmh, qldc, qlgv);
+                            break;
+                        default:
+                            System.out.println("Khong hop le!!!");
+                    }
+                    break;
+                case 2:
+                    xoaDc(qlmh, qldc, qlgv);
+                    break;
+                case 3:
+                    menuDeCuong(qlmh, qldc, qlgv);
+                    break;
+                default:
+                    System.out.println("Khong hop le!!!");
+            }
+        } else {
+            System.out.println("De cuong khong ton tai!!");
+        }
+    }
+
+    
+     //tìm kiếm dề cương
+    private void timDC(QLMH qlmh, QLDCM qldc, QLGV qlgv) throws ParseException {
+        String s;
+        sc.nextLine();
+        DeCuong c = new DeCuong();
+        System.out.print("Nhap ten hoac ma của mon hoc và giang vien cua de cuong muon tim: ");
+        s = sc.nextLine();
+        if (qldc.timDCTheoTenMH(s) != null) {
+            c = qldc.timDCTheoTenMH(s);
+        }
+        if (qldc.timDCTheoMaMH(s) != null) {
+            c = qldc.timDCTheoMaMH(s);
+        }
+        if (qldc.timDCTheoMaGV(s) != null) {
+            c = qldc.timDCTheoMaGV(s);
+        }
+        if (qldc.timDCTheoTenGV(s) != null) {
+            c = qldc.timDCTheoTenGV(s);
+        }
+        if (qldc.timDCTheoMa(s) != null) {
+            c = qldc.timDCTheoMa(s);
+        }
+        if (c != null) {              
+                System.out.println("-----------------------De cuong------------------------");
+            System.out.println("Ma mon hoc: " + c.getId());
+            System.out.println("Giang vien: " + c.getgV().getTen());
+            System.out.println("He: " + c.getHe().getTen());
+            System.out.println("Muc tieu: " + c.getMucTieu());
+            System.out.println("Chuan dau ra: " + c.getChuanDauRa());
+            System.out.println("-------------------------end--------------------------");
+            System.out.println("Tim tiep hay thoat?");
+            System.out.println("1. Tim");
+            System.out.println("2. Thoat");
+            n = sc.nextInt();
+            switch (n) {
+                case 1:
+                    timDC(qlmh, qldc, qlgv);
+                    break;
+                case 2:
+                    menuDeCuong(qlmh, qldc, qlgv);
+                    break;
+                default:
+                    System.out.println("Khong hop le!!!");
+            } 
+        } else {
+            System.out.println("De cuong khong ton tai!!");
+        }
+    }
+
+    
+    //xem ds môn học
+    private void hienThiDsDc(QLMH qlmh, QLDCM qldc, QLGV qlgv) throws ParseException {
+        int i = 1;
+        System.out.println("-----------------------Danh sach de cuong------------------------");
+        for (DeCuong c : qldc.getDc()) {
+            System.out.println(i);
+            System.out.println("Ten mon hoc cua de cuong: " + c.getMh().getTen());
+            System.out.println("He: " + c.getHe().getTen());
+            i++;
+        }
+        System.out.println("-------------------------end--------------------------");
+        System.out.println("Ban tiep tuc xem hay quay lai menu de cuong?");
+        System.out.println("1. Tiep tuc");
+        System.out.println("2. Quay lai");
+        n = sc.nextInt();
+        switch (n) {
+            case 1:
+                hienThiDsMH(qlmh, qldc, qlgv);
+                break;
+            case 2:
+                menuMonHoc(qlmh, qldc, qlgv);
+                break;
+            default:
+                System.out.println("Khong hop le!!!");
+        }
+    }
+    
+    
+    //lưu hình thức đánh giá
+
+    
     //Lưu đề cương
     private void menuLuuDCCQ(QLMH qlmh, QLDCM qldc, QLGV qlgv) throws ParseException {
         DeCuong c = new DeCuong();
         String s;
+        MonHoc m = new MonHoc();
         System.out.print("Nhap ten hoac ma mon hoc muon tao de cuong: ");
         s = sc.nextLine();
-        if (qlmh.timMHTheoId(s) != null || qlmh.timMHTheoTen(s) != null) {
-            int h = 0;
-            System.out.println("-----------------------menu------------------------");
-            System.out.println("1. He chinh quy");
-            System.out.println("2. He tu xa");
-            System.out.println("3. Quay lai");
-            System.out.println("4. Thoat");
-            System.out.println("-----------------------end------------------------");
-            System.out.print("chon he dao tao: ");
-            switch (h) {
-                case 1:
-                    HeDaoTao hd = new HeDaoTao(1, "He chinh quy");
-                    c.setHe(hd);
-                    break;
-                case 2:
-                    HeDaoTao he = new HeDaoTao(2, "He tu xa");
-                    c.setHe(he);
-                    break;
-                case 3:
-                    menuMain(qlmh, qldc, qlgv);
-                    break;
-                case 4:
-                    System.out.println("Cam on da su dung");
-                    break;
-                default:
-                    System.out.println("Khong hop le!!!");
+        if (qlmh.timMHTheoId(s) != null) {
+            m = qlmh.timMHTheoId(s);
+        }
+        if (qlmh.timMHTheoTen(s) != null) {
+            m = qlmh.timMHTheoTen(s);
+        }
+        if (m != null) {
+            if (qldc.checkMH(m, cq) == true) {
+                c.setMh(m);
+                c.setHe(cq);
+                int h = 0;
+                System.out.println("-----------------------De cuong------------------------");
+                System.out.println("Mon hoc tao de cuong: " + m.getTen());
+                System.out.print("Nhap ma de cuong: ");
+                c.setId(sc.nextLine());
+                System.out.print("Nhap muc tieu mon hoc: ");
+                c.setMucTieu(sc.nextLine());
+                System.out.print("Nhap chuan dau ra: ");
+                c.setChuanDauRa(sc.nextLine());
+                System.out.println("Nhap muc tieu mon hoc: ");
+                c.setMucTieu(sc.nextLine());
+                System.out.println("Nhap chuan dau ra mon hoc: ");
+                c.setChuanDauRa(sc.nextLine());
+                do {
+                    GiangVien gv = new GiangVien();
+                    System.out.println("Nhap ma hoac ten giang vien: ");
+                    s = sc.nextLine();
+                    if (qlgv.timGVTheoMa(s) != null) {
+                        gv = qlgv.timGVTheoMa(s);
+                    }
+                    if (qlgv.timGVTheoTen(s) != null) {
+                        gv = qlgv.timGVTheoTen(s);
+                    }
+                    if (gv != null) {
+                        if (qldc.checkGv(gv) < 6) {
+                            c.setgV(gv);
+                        } else {
+                            System.out.println("Giang vien da vuoc qua so luong!!!");
+                        }
+                    } else {
+                        System.out.println("Giang vien khong ton tai!!!");
+                    }
+                } while (c.getgV() != null);
+                System.out.println(": ");
+                System.out.println("-----------------------end------------------------");
+                qldc.themDC(c);
+            } else {
+                System.out.println("De cuong mon hoc nay cua he chinh quy da ton tai!!!");
             }
-            System.out.println("Nhap muc tieu mon hoc: ");
-            c.setMucTieu(sc.nextLine());
-            System.out.println("Nhap chuan dau ra mon hoc: ");
-            c.setChuanDauRa(sc.nextLine());
-            qldc.themDC(c);
         } else {
             System.out.println("Mon hoc khong ton tai!!!");
         }
     }
-    
+
     private void menuLuuDCTX(QLMH qlmh, QLDCM qldc, QLGV qlgv) throws ParseException {
         DeCuong c = new DeCuong();
         String s;
+        MonHoc m = new MonHoc();
         System.out.print("Nhap ten hoac ma mon hoc muon tao de cuong: ");
         s = sc.nextLine();
-        if (qlmh.timMHTheoId(s) != null || qlmh.timMHTheoTen(s) != null) {
-            int h = 0;
-            System.out.println("-----------------------menu------------------------");
-            System.out.println("1. He chinh quy");
-            System.out.println("2. He tu xa");
-            System.out.println("3. Quay lai");
-            System.out.println("4. Thoat");
-            System.out.println("-----------------------end------------------------");
-            System.out.print("chon he dao tao: ");
-            switch (h) {
-                case 1:
-                    HeDaoTao hd = new HeDaoTao(1, "He chinh quy");
-                    c.setHe(hd);
-                    break;
-                case 2:
-                    HeDaoTao he = new HeDaoTao(2, "He tu xa");
-                    c.setHe(he);
-                    break;
-                case 3:
-                    menuMain(qlmh, qldc, qlgv);
-                    break;
-                case 4:
-                    System.out.println("Cam on da su dung");
-                    break;
-                default:
-                    System.out.println("Khong hop le!!!");
+        if (qlmh.timMHTheoId(s) != null) {
+            m = qlmh.timMHTheoId(s);
+        }
+        if (qlmh.timMHTheoTen(s) != null) {
+            m = qlmh.timMHTheoTen(s);
+        }
+        if (m != null) {
+            if (qldc.checkMH(m, tx) == true) {
+                c.setMh(m);
+                c.setHe(tx);
+                int h = 0;
+                System.out.println("-----------------------De cuong------------------------");
+                System.out.println("Mon hoc tao de cuong: " + m.getTen());
+                System.out.print("Nhap ma de cuong: ");
+                c.setId(sc.nextLine());
+                System.out.print("Nhap muc tieu mon hoc: ");
+                c.setMucTieu(sc.nextLine());
+                System.out.print("Nhap chuan dau ra: ");
+                c.setChuanDauRa(sc.nextLine());
+                System.out.println("Nhap muc tieu mon hoc: ");
+                c.setMucTieu(sc.nextLine());
+                System.out.println("Nhap chuan dau ra mon hoc: ");
+                c.setChuanDauRa(sc.nextLine());
+                do {
+                    GiangVien gv = new GiangVien();
+                    System.out.println("Nhap ma hoac ten giang vien: ");
+                    s = sc.nextLine();
+                    if (qlgv.timGVTheoMa(s) != null) {
+                        gv = qlgv.timGVTheoMa(s);
+                    }
+                    if (qlgv.timGVTheoTen(s) != null) {
+                        gv = qlgv.timGVTheoTen(s);
+                    }
+                    if (gv != null) {
+                        if (qldc.checkGv(gv) < 6) {
+                            c.setgV(gv);
+                        } else {
+                            System.out.println("Giang vien da vuoc qua so luong!!!");
+                        }
+                    } else {
+                        System.out.println("Giang vien khong ton tai!!!");
+                    }
+                } while (c.getgV() != null);
+                System.out.println(": ");
+                System.out.println("-----------------------end------------------------");
+                qldc.themDC(c);
+            } else {
+                System.out.println("De cuong mon hoc nay cua he tu xa da ton tai!!!");
             }
-            System.out.println("Nhap muc tieu mon hoc: ");
-            c.setMucTieu(sc.nextLine());
-            System.out.println("Nhap chuan dau ra mon hoc: ");
-            c.setChuanDauRa(sc.nextLine());
-            qldc.themDC(c);
         } else {
             System.out.println("Mon hoc khong ton tai!!!");
         }
@@ -188,13 +383,18 @@ public class Menu {
     //xóa môn học
     private void xoaMH(QLMH qlmh, QLDCM qldc, QLGV qlgv) throws ParseException {
         String s;
-        sc.nextLine();
+        sc.nextLine(); 
+        MonHoc m = new MonHoc();
         System.out.print("Nhap ten hoac ma mon hoc muon xoa: ");
         s = sc.nextLine();
-        if (qlmh.timMHTheoId(s) != null || qlmh.timMHTheoTen(s) != null) {
-            if (qlmh.timMHTheoId(s) != null) {
-                MonHoc m = qlmh.timMHTheoId(s);
-                System.out.println("-----------------------Mon Hoc------------------------");
+        if (qlmh.timMHTheoId(s) != null ) {
+            m = qlmh.timMHTheoId(s);
+        }
+        if (qlmh.timMHTheoId(s) != null) {
+            m = qlmh.timMHTheoId(s);
+        }          
+        if( m != null){
+            System.out.println("-----------------------Mon Hoc------------------------");
                 System.out.println("Nhap ma mon hoc: " + m.getId());
                 System.out.println("Nhap ten mon hoc: " + m.getTen());
                 System.out.println("Nhap ma mo ta mon hoc: " + m.getMoTa());
@@ -235,51 +435,6 @@ public class Menu {
                     default:
                         System.out.println("Khong hop le!!!");
                 }
-            } else {
-                MonHoc m = qlmh.timMHTheoTen(s);
-                System.out.println("-----------------------Mon Hoc------------------------");
-                System.out.print("Nhap ma mon hoc: " + m.getId());
-                System.out.print("Nhap ten mon hoc: " + m.getTen());
-                System.out.print("Nhap ma mo ta mon hoc: " + m.getMoTa());
-                System.out.print("Nhap so tin chi: " + m.getSoTC());
-                System.out.println("-------------------------end--------------------------");
-                n = sc.nextInt();
-                 System.out.println("Co phai mon hoc muon xoa?");
-                System.out.println("1. Xoa");
-                System.out.println("2. Tim lai");
-                System.out.println("3. Quay lai menu mon hoc");
-                n = sc.nextInt();
-                switch (n) {
-                    case 1:
-                        if(qlmh.xoaMH(m)== true){
-                            System.out.println("Xoa thanh cong!!!");
-                        }else{
-                                System.out.println("Xoa that bai!!!");}
-                        System.out.println("Ban co muon tiep tuc xoa?");
-                        System.out.println("1. Co");
-                        System.out.println("2. Khong");
-                        n = sc.nextInt();
-                        switch (n) {
-                            case 1:
-                                xoaMH(qlmh, qldc, qlgv);
-                                break;
-                            case 2:
-                                menuMonHoc(qlmh, qldc, qlgv);
-                                break;
-                            default:
-                                System.out.println("Khong hop le!!!");
-                        }
-                        break;
-                    case 2:
-                        xoaMH(qlmh, qldc, qlgv);
-                        break;
-                    case 3:
-                        menuMonHoc(qlmh, qldc, qlgv);
-                        break;
-                    default:
-                        System.out.println("Khong hop le!!!");
-                }
-            }
         } else {
             System.out.println("Mon hoc khong ton tai!!");
         }
@@ -290,12 +445,17 @@ public class Menu {
     private void timMH(QLMH qlmh, QLDCM qldc, QLGV qlgv) throws ParseException {
         String s;
         sc.nextLine();
+        MonHoc m = new MonHoc();
         System.out.print("Nhap ten hoac ma mon hoc muon tim: ");
         s = sc.nextLine();
-        if (qlmh.timMHTheoId(s) != null || qlmh.timMHTheoTen(s) != null) {
-            if (qlmh.timMHTheoId(s) != null) {
-                MonHoc m = qlmh.timMHTheoId(s);
-                System.out.println("-----------------------Mon Hoc------------------------");
+        if (qlmh.timMHTheoId(s) != null) {
+            m = qlmh.timMHTheoId(s);
+        }
+        if (qlmh.timMHTheoTen(s) != null) {
+            m = qlmh.timMHTheoTen(s);
+        }       
+        if(m != null){
+             System.out.println("-----------------------Mon Hoc------------------------");
                 System.out.println("Nhap ma mon hoc: " + m.getId());
                 System.out.println("Nhap ten mon hoc: " + m.getTen());
                 System.out.println("Nhap ma mo ta mon hoc: " + m.getMoTa());
@@ -335,51 +495,7 @@ public class Menu {
                     default:
                         System.out.println("Khong hop le!!!");
                 }
-            } else {
-                MonHoc m = qlmh.timMHTheoTen(s);
-                System.out.println("-----------------------Mon Hoc------------------------");
-                System.out.print("Nhap ma mon hoc: " + m.getId());
-                System.out.print("Nhap ten mon hoc: " + m.getTen());
-                System.out.print("Nhap ma mo ta mon hoc: " + m.getMoTa());
-                System.out.print("Nhap so tin chi: " + m.getSoTC());
-                if (m.getDstr().size() > 0) {
-                    System.out.println("Danh sach mon hoc truoc: ");
-                    int i = 0;
-                    for (MonHoc h : m.getDstr()) {
-                        System.out.println(i + ". " + h.getTen());
-                        i++;
-                    }
-                }else{
-                    System.out.println("Danh sach mon hoc truoc: Khong co");
-                }
-                if(m.getDstq().size()>0){
-                    System.out.println("Danh sach mon hoc tien quyet: ");
-                    int i = 0;
-                    for (MonHoc h : m.getDstq()) {
-                        System.out.println(i + ". " + h.getTen());
-                        i++;
-                    }
-                }else{
-                    System.out.println("Danh sach mon hoc tien quyet: Khong co");
-                }
-                System.out.println("-------------------------end--------------------------");
-                n = sc.nextInt();
-                System.out.println("Ban tiep tuc xem hay quay lai menu mon hoc?");
-                System.out.println("1. Tiep tuc");
-                System.out.println("2. Quay lai");
-                n = sc.nextInt();
-                switch (n) {
-                    case 1:
-                        timMH(qlmh, qldc, qlgv);
-                        break;
-                    case 2:
-                        menuMonHoc(qlmh, qldc, qlgv);
-                        break;
-                    default:
-                        System.out.println("Khong hop le!!!");
-                }
-            }
-        } else {
+        }else {
             System.out.println("Mon hoc khong ton tai!!");
         }
     }
@@ -387,7 +503,7 @@ public class Menu {
     
     //xem ds môn học
     private void hienThiDsMH(QLMH qlmh, QLDCM qldc, QLGV qlgv) throws ParseException {
-        int i = 0;
+        int i = 1;
         System.out.println("-----------------------Danh sach mon hoc------------------------");
         for (MonHoc m : qlmh.getMh()) {
             System.out.println("Nhap ten mon hoc: " + m.getTen());
@@ -506,16 +622,23 @@ public class Menu {
             }
             System.out.print("Nhap ma mon hoc hoac ten mon hoc: ");
             s = sc.nextLine();
-            if (qlmh.timMHTheoTen(s) != null || qlmh.timMHTheoId(s) != null) {
-                if (qlmh.timMHTheoTen(s) != null) {
-                    mh.add(qlmh.timMHTheoTen(s));
+                if (qlmh.timMHTheoTen(s) != null || qlmh.timMHTheoId(s) != null) {
+                    if (qlmh.timMHTheoTen(s) != null) {
+                         MonHoc mon = qlmh.timMHTheoId(s);
+                        if(mon.getTen().equals(s)==false && m.checkList(mon) == false){
+                            mh.add(qlmh.timMHTheoTen(s));
+                        }else{System.out.print("Mon hoc da ton tai!!!");}
+                    }
+                    if (qlmh.timMHTheoId(s) != null) {
+                        MonHoc mon = qlmh.timMHTheoId(s);
+                        if(mon.getTen().equals(s)==false && m.checkList(mon) == false){
+                            mh.add(qlmh.timMHTheoId(s));
+                        }else{System.out.print("Mon hoc da ton tai!!!");}
+                    }
+                } else {
+                    System.out.print("Mon hoc khong ton tai!!!");
                 }
-                if (qlmh.timMHTheoId(s) != null) {
-                    mh.add(qlmh.timMHTheoId(s));
-                }
-            } else {
-                System.out.print("Mon hoc khong ton tai!!!");
-            }
+           
             System.out.println("-----------------------------end--------------------------------");
             System.out.println("Nhap tiep hoac thoat");
             System.out.println("1. Nhap tiep");
@@ -556,10 +679,16 @@ public class Menu {
             s = sc.nextLine();
             if (qlmh.timMHTheoTen(s) != null || qlmh.timMHTheoId(s) != null) {
                 if (qlmh.timMHTheoTen(s) != null) {
-                    mh.add(qlmh.timMHTheoTen(s));
+                    MonHoc mon = qlmh.timMHTheoId(s);
+                        if(mon.getTen().equals(s)==false && m.checkList(mon) == false){
+                            mh.add(qlmh.timMHTheoTen(s));
+                        }else{System.out.print("Mon hoc da ton tai!!!");}
                 }
                 if (qlmh.timMHTheoId(s) != null) {
-                    mh.add(qlmh.timMHTheoId(s));
+                    MonHoc mon = qlmh.timMHTheoId(s);
+                        if(mon.getTen().equals(s)==false && m.checkList(mon) == false){
+                            mh.add(qlmh.timMHTheoId(s));
+                        }else{System.out.print("Mon hoc da ton tai!!!");}
                 }
             } else {
                 System.out.print("Mon hoc khong ton tai!!!");
@@ -589,6 +718,7 @@ public class Menu {
     //lưu môn học
     private void menuLuuMHCS(QLMH qlmh, QLDCM qldc, QLGV qlgv) throws ParseException {
         MonHoc m = new MonHoc();
+        m.setKt(cs);
         System.out.println("-----------------------Mon Hoc------------------------");
         System.out.print("Nhap ma mon hoc: ");
         m.setId(sc.nextLine());
@@ -624,6 +754,7 @@ public class Menu {
 
     private void menuLuuMHN(QLMH qlmh, QLDCM qldc, QLGV qlgv) throws ParseException {
         MonHoc m = new MonHoc();
+        m.setKt(csn);
         System.out.println("-----------------------Mon Hoc------------------------");
         System.out.print("Nhap ma mon hoc: ");
         m.setId(sc.nextLine());
@@ -676,6 +807,7 @@ public class Menu {
     
     private void menuLuuMHCSN(QLMH qlmh, QLDCM qldc, QLGV qlgv) throws ParseException {
         MonHoc m = new MonHoc();
+        m.setKt(cn);
         System.out.println("-----------------------Mon Hoc------------------------");
         System.out.print("Nhap ma mon hoc: ");
         m.setId(sc.nextLine());
