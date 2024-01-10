@@ -4,6 +4,8 @@
  */
 package com.mycompany.qldc;
 
+import java.util.List;
+
 /**
  *
  * @author Admin
@@ -15,6 +17,7 @@ public class DeCuong {
     private HeDaoTao he;
     private GiangVien gV;
     private MonHoc mh;
+    private List<HinhThucDanhGia> dsht;
 
     public DeCuong(){}
     
@@ -109,6 +112,20 @@ public class DeCuong {
      */
     public void setMh(MonHoc mh) {
         this.mh = mh;
+    }
+
+    /**
+     * @return the dsht
+     */
+    public List<HinhThucDanhGia> getDsht() {
+        return dsht;
+    }
+
+    /**
+     * @param dsht the dsht to set
+     */
+    public void setDsht(List<HinhThucDanhGia> dsht) {
+        this.dsht = dsht;
     }
     
 }

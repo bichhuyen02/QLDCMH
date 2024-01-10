@@ -8,14 +8,14 @@ package com.mycompany.qldc;
  *
  * @author Admin
  */
-public abstract class HinhThucDanhGia {
+public class HinhThucDanhGia {
     private int ma;
     private String phuongPDG;
     private String noiDung;
     private float tiTrong;
     public HinhThucDanhGia(){}
-    public abstract void them();
-    public abstract void xoa();
+    public void them(){}
+    public void xoa(){}
 
     /**
      * @return the ma

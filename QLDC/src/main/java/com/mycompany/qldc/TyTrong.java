@@ -12,7 +12,7 @@ public class TyTrong {
     private int id;
     private DeCuong de;
     private HinhThucDanhGia danhGia;
-    private float tyTrong;
+    private double cotDiem;
     
     public TyTrong(){}
 
@@ -56,6 +56,20 @@ public class TyTrong {
      */
     public void setDanhGia(HinhThucDanhGia danhGia) {
         this.danhGia = danhGia;
+    }
+
+    /**
+     * @return the cotDiem
+     */
+    public double getCotDiem() {
+        return cotDiem;
+    }
+
+    /**
+     * @param cotDiem the cotDiem to set
+     */
+    public void setCotDiem(double cotDiem) {
+        this.cotDiem = cotDiem;
     }
     
 }

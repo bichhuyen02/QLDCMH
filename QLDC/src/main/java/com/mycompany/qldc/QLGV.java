@@ -13,16 +13,21 @@ import java.util.List;
  *
  * @author Admin
  */
-public class QLGV {
+public class QLGV extends QLChung{
 
     private List<GiangVien> gv = new ArrayList<>();
+    
+    @Override
+    public void hienthiDS() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
     public void themGV(GiangVien... g) {
         this.gv.addAll(Arrays.asList(g));
     }
 
     public void themGV(GiangVien g) throws ParseException {
-        this.getGv().add(g);
+       this.gv.add(g);
     }
 
     public GiangVien timGVTheoMa(String tuKhoa) {

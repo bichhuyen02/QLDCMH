@@ -13,9 +13,14 @@ import java.util.List;
  *
  * @author Admin
  */
-public class QLDCM {
+public class QLDCM extends QLChung{
 
     private List<DeCuong> dc = new ArrayList<>();
+    
+    @Override
+    public void hienthiDS() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
     public void themDC(DeCuong... d) {
         this.dc.addAll(Arrays.asList(d));
