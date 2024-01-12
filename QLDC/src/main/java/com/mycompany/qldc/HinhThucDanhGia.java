@@ -10,11 +10,19 @@ package com.mycompany.qldc;
  */
 public class HinhThucDanhGia {
     private int ma;
+    private String ten;
     private String phuongPDG;
     private String noiDung;
-    private float tiTrong;
+    
     public HinhThucDanhGia(){}
-    public void them(){}
+    
+    public void them(int ma, String ten,String phuongPDG, String noiDung){
+        this.ma = ma;
+        this.ten = ten;
+        this.phuongPDG = phuongPDG;
+        this.noiDung = noiDung;
+    }
+    
     public void xoa(){}
 
     /**
@@ -60,16 +68,16 @@ public class HinhThucDanhGia {
     }
 
     /**
-     * @return the tiTrong
+     * @return the ten
      */
-    public float getTiTrong() {
-        return tiTrong;
+    public String getTen() {
+        return ten;
     }
 
     /**
-     * @param tiTrong the tiTrong to set
+     * @param ten the ten to set
      */
-    public void setTiTrong(float tiTrong) {
-        this.tiTrong = tiTrong;
+    public void setTen(String ten) {
+        this.ten = ten;
     }
 }

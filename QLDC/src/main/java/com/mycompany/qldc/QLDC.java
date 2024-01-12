@@ -19,6 +19,8 @@ public class QLDC {
         QLGV qlgv = new QLGV();
         QLDCM qldc = new QLDCM();
         QLMH qlmh = new QLMH();
+        QLTT qltt = new QLTT();
+        QLHT qlht = new QLHT();
         Menu menu = new Menu();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -101,7 +103,7 @@ public class QLDC {
                     hdt2, gv3, mh5);
             qldc.themDC(dc8, dc7, dc6, dc5, dc4, dc3, dc2, dc1);
 
-            menu.menuMain(qlmh, qldc, qlgv);
+            menu.menuMain(qlmh, qldc, qlgv, qlht,qltt);
 //            System.out.println(qlmh.timMHTheoTen("CSLT").getTen());
         } catch (ParseException e) {
             e.printStackTrace();

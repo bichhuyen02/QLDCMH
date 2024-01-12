@@ -18,7 +18,11 @@ public class QLMH extends QLChung{
     private List<MonHoc> mh = new ArrayList<>();
     @Override
     public void hienthiDS() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int i = 1;
+        for (MonHoc m : mh) {
+            System.out.println(i + "Ten mon hoc: " + m.getTen());
+            i++;
+        }
     }
     
     public void themMH(MonHoc... m) {

@@ -19,7 +19,13 @@ public class QLDCM extends QLChung{
     
     @Override
     public void hienthiDS() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int i = 1;
+        for (DeCuong c : dc) {
+            System.out.println(i);
+            System.out.println("Ten mon hoc cua de cuong: " + c.getMh().getTen());
+            System.out.println("He: " + c.getHe().getTen());
+            i++;
+        }
     }
 
     public void themDC(DeCuong... d) {
