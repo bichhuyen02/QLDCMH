@@ -95,7 +95,7 @@ public class QLDCM extends QLChung{
     public int checkGv(GiangVien gv){
         int i = 0;
         for (DeCuong d : dc) {
-            if (d.getgV().equals(gv) == true) {
+            if (d.getgV().getMaGV().equals(gv.getMaGV()) == true) {
                 i++;
             }
         }
@@ -104,11 +104,21 @@ public class QLDCM extends QLChung{
     
     public boolean checkMH(MonHoc m, HeDaoTao he){
         for (DeCuong d : dc) {
-            if (d.getMh().equals(m) == true && d.getHe().equals(he)) {
+            if (d.getMh().getTen().equals(m.getTen()) && d.getHe().getTen().equals(he.getTen())) {
                return false;
             }
         }
         return true;
+    }
+    
+    public List<DeCuong> thongKe(int n){
+        List<DeCuong> c = new ArrayList<>();
+        for(DeCuong d : dc){
+            if(d.getMh().getSoTC()==n){
+                c.add(d);
+            }
+        }
+        return c;
     }
     
     /**

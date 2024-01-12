@@ -40,10 +40,6 @@ public class QLMH extends QLChung{
         return false;
     }
 
-    public void suaMH(MonHoc m) {
-
-    }
-
     public MonHoc timMHTheoTen(String tuKhoa) {
         for (MonHoc m : mh) {
             if (m.getTen().equals(tuKhoa) == true) {
