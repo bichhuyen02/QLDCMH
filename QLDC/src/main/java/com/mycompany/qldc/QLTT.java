@@ -21,15 +21,15 @@ public class QLTT extends QLChung{
     public void hienthiDS() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    public void themHT(TyTrong... h) {
+    public void themTT(TyTrong... h) {
         this.tt.addAll(Arrays.asList(h));
     }
 
-    public void themHT(TyTrong h) throws ParseException {
+    public void themTT(TyTrong h) throws ParseException {
         this.tt.add(h);
     }
 
-    public boolean xoaHT(TyTrong h) {
+    public boolean xoaT(TyTrong h) {
         if (tt.remove(h) == true) {
             return true;
         }

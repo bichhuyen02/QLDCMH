@@ -22,7 +22,7 @@ public class Menu {
     private int n = 0;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     HeDaoTao cq = new HeDaoTao(1, "Chinh quy");
-    HeDaoTao tx = new HeDaoTao(2, "Tu xa");
+    HeDaoTao tx = new HeDaoTao(2, "Lien thong");
     KhoiKienThuc cs = new KhoiKienThuc(1, "Co so");
     KhoiKienThuc csn = new KhoiKienThuc(2, "Co so nganh");
     KhoiKienThuc cn = new KhoiKienThuc(3, "Chuyen nganh");
@@ -34,7 +34,7 @@ public class Menu {
         String s;
         DeCuong c = new DeCuong();
         sc.nextLine();
-        System.out.print("Nhap ten hoac ma cua giang vien / mon hoc của de cuong muon xoa: ");
+        System.out.print("Nhap ten hoac ma cua giang vien / mon hoc cua de cuong muon xoa: ");
         s = sc.nextLine();
         if (qldc.timDCTheoTenMH(s) != null) {
             c = qldc.timDCTheoTenMH(s);
@@ -58,6 +58,7 @@ public class Menu {
             System.out.println("He: " + c.getHe().getTen());
             System.out.println("Muc tieu: " + c.getMucTieu());
             System.out.println("Chuan dau ra: " + c.getChuanDauRa());
+//            System.out.println("Hinh thuc đanh gia: " );
             System.out.println("-------------------------end--------------------------");
             System.out.println("Co phai de cuong muon xoa?");
             System.out.println("1. Xoa");
@@ -123,8 +124,8 @@ public class Menu {
         if (qldc.timDCTheoMa(s) != null) {
             c = qldc.timDCTheoMa(s);
         }
-        if (c != null) {              
-                System.out.println("-----------------------De cuong------------------------");
+        if (c.getId() != null) {              
+            System.out.println("-----------------------De cuong------------------------");
             System.out.println("Ma mon hoc: " + c.getMh().getId());
             System.out.println("Ten mon hoc: " + c.getMh().getTen());
             System.out.println("Mo ta mon hoc: " + c.getMh().getMoTa());
@@ -133,6 +134,15 @@ public class Menu {
             System.out.println("He: " + c.getHe().getTen());
             System.out.println("Muc tieu: " + c.getMucTieu());
             System.out.println("Chuan dau ra: " + c.getChuanDauRa());
+            System.out.println("Hinh thuc danh gia: ");
+            if(qltt.timTTtheoDC(c).size()>0){
+                for(TyTrong t:qltt.timTTtheoDC(c)){
+                    System.out.println("Hinh thuc danh gia: "+ t.getDanhGia().getTen());
+                    System.out.println("Hinh thuc danh gia: "+ t.getDanhGia().getPhuongPDG());
+                    System.out.println("Hinh thuc danh gia: "+ t.getDanhGia().getNoiDung());
+                    System.out.println("Hinh thuc danh gia: "+ t.getCotDiem());
+                }
+            }
             System.out.println("-------------------------end--------------------------");
             System.out.println("Tim tiep hay thoat?");
             System.out.println("1. Tim");
@@ -154,7 +164,7 @@ public class Menu {
     }
 
     
-    //xem ds môn học
+    //xem ds de cuong
     private void hienThiDsDc(QLMH qlmh, QLDCM qldc, QLGV qlgv, QLHT qlht, QLTT qltt) throws ParseException {
         System.out.println("-----------------------Danh sach de cuong------------------------");
         qldc.hienthiDS();
@@ -165,10 +175,10 @@ public class Menu {
         n = sc.nextInt();
         switch (n) {
             case 1:
-                hienThiDsMH(qlmh, qldc, qlgv, qlht, qltt);
+                hienThiDsDc(qlmh, qldc, qlgv, qlht, qltt);
                 break;
             case 2:
-                menuMonHoc(qlmh, qldc, qlgv, qlht, qltt);
+                menuDeCuong(qlmh, qldc, qlgv, qlht, qltt);
                 break;
             default:
                 System.out.println("Khong hop le!!!");
@@ -178,6 +188,8 @@ public class Menu {
     
     //lưu hình thức đánh giá
     private void luuTT(DeCuong c,HinhThucDanhGia ht, QLMH qlmh, QLDCM qldc, QLGV qlgv, QLHT qlht, QLTT qltt) throws ParseException {
+        String s;
+        s = sc.nextLine();
         TyTrong t = new TyTrong();
         System.out.print("Nhap noi dung hinh thuc danh gia:");
         ht.setNoiDung(sc.nextLine());
@@ -190,6 +202,8 @@ public class Menu {
     }
     
     private void luuHT(DeCuong c,HinhThucDanhGia ht, QLMH qlmh, QLDCM qldc, QLGV qlgv, QLHT qlht, QLTT qltt) throws ParseException {
+        String s;
+        s = sc.nextLine();
         System.out.print("Chon phuong phap danh gia:");
         System.out.print("1. Qua trinh");
         System.out.print("2. Cuoi ki");
@@ -220,6 +234,7 @@ public class Menu {
             
     private void  luuDG(DeCuong c,QLMH qlmh, QLDCM qldc, QLGV qlgv, QLHT qlht, QLTT qltt) throws ParseException {
         String s;
+        s = sc.nextLine();
         do {
             HinhThucDanhGia ht = new HinhThucDanhGia();
             System.out.print("Chon hinh thuc danh gia:");
@@ -248,6 +263,8 @@ public class Menu {
     private void menuLuuDCCQ(QLMH qlmh, QLDCM qldc, QLGV qlgv, QLHT qlht, QLTT qltt) throws ParseException {
         DeCuong c = new DeCuong();
         String s;
+        s = sc.nextLine();
+
         MonHoc m = new MonHoc();
         System.out.print("Nhap ten hoac ma mon hoc muon tao de cuong: ");
         s = sc.nextLine();
@@ -257,7 +274,7 @@ public class Menu {
         if (qlmh.timMHTheoTen(s) != null) {
             m = qlmh.timMHTheoTen(s);
         }
-        if (m != null) {
+        if (m.getId() != null) {
             if (qldc.checkMH(m, cq) == true) {
                 c.setMh(m);
                 c.setHe(cq);
@@ -269,10 +286,6 @@ public class Menu {
                 System.out.print("Nhap muc tieu mon hoc: ");
                 c.setMucTieu(sc.nextLine());
                 System.out.print("Nhap chuan dau ra: ");
-                c.setChuanDauRa(sc.nextLine());
-                System.out.println("Nhap muc tieu mon hoc: ");
-                c.setMucTieu(sc.nextLine());
-                System.out.println("Nhap chuan dau ra mon hoc: ");
                 c.setChuanDauRa(sc.nextLine());
                 do {
                     GiangVien gv = new GiangVien();
@@ -293,7 +306,8 @@ public class Menu {
                     } else {
                         System.out.println("Giang vien khong ton tai!!!");
                     }
-                } while (c.getgV() != null);
+                } while (c.getgV() == null);
+                luuDG(c, qlmh, qldc, qlgv, qlht, qltt);
                 System.out.println("-----------------------end------------------------");
                 qldc.themDC(c);
             } else {
@@ -370,7 +384,7 @@ public class Menu {
         do {
             System.out.println("-----------------------menu------------------------");
             System.out.println("1. He chinh quy");
-            System.out.println("2. He tu xa");
+            System.out.println("2. He lien thong");
             System.out.println("3. Quay lai menu");
             System.out.println("4. Thoat");
             System.out.println("-----------------------end------------------------");
@@ -418,13 +432,13 @@ public class Menu {
                     System.out.println("com.mycompany.qldcmh.QLDCMH.main()");
                     break;
                 case 3:
-                    System.out.println("com.mycompany.qldcmh.QLDCMH.main()");
+                    xoaDc(qlmh, qldc, qlgv, qlht, qltt);
                     break;
                 case 4:
-                    System.out.println("com.mycompany.qldcmh.QLDCMH.main()");
+                    timDC(qlmh, qldc, qlgv, qlht, qltt);
                     break;
                 case 5:
-                    System.out.println("com.mycompany.qldcmh.QLDCMH.main()");
+                    hienThiDsDc(qlmh, qldc, qlgv, qlht, qltt);
                     break;
                 case 6:
                     menuMain(qlmh, qldc, qlgv, qlht, qltt);
@@ -547,12 +561,12 @@ public class Menu {
                 n = sc.nextInt();
                 switch (n) {
                     case 1:
-                        System.out.print("Nhap ma moi: ");
+                        System.out.print("Nhap ma mon: ");
                         m.setId(sc.nextLine());
                         suaMH(qlmh, qldc, qlgv, qlht, qltt);
                         break;
                     case 2:
-                        System.out.print("Nhap ten moi: ");
+                        System.out.print("Nhap ten mon: ");
                         m.setTen(sc.nextLine());
                         suaMH(qlmh, qldc, qlgv, qlht, qltt);
                         break;
@@ -567,7 +581,7 @@ public class Menu {
                         suaMH(qlmh, qldc, qlgv, qlht, qltt);
                         break;
                     case 5:
-                        System.out.print("Nhap ma moi: ");
+                        System.out.print("Nhap ma mon: ");
                         m.setId(sc.nextLine());
                         suaMH(qlmh, qldc, qlgv, qlht, qltt);
                         break;
@@ -1081,7 +1095,8 @@ public class Menu {
             System.out.println("2. Quan ly de cuong mon hoc");
             System.out.println("4. Tim kiem mon hoc");
             System.out.println("5. Tim kiem de cuong mon hoc theo ma giang vien");
-            System.out.println("6. Thoat");
+            System.out.println("6. Thong ke ");
+            System.out.println("7. Thoat");
             System.out.println("-----------------------end------------------------");
             System.out.print("chon: ");
             n = sc.nextInt();
@@ -1105,9 +1120,12 @@ public class Menu {
                 case 6:
                     System.out.println("Cam on da su dung");
                     break;
+                case 7:
+                    System.out.println("Cam on da su dung");
+                    break;
                 default:
                     System.out.println("Khong hop le!!!");
             }
-        } while (n < 6);
+        } while (n < 7);
     }
 }
