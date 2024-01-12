@@ -52,12 +52,12 @@ public class MonHoc {
 
     public boolean checkList(MonHoc m) {
         for (MonHoc mon : this.dstq) {
-            if (mon.equals(m) == true) {
+            if (mon.id.equals(m.id) == true) {
                 return true;
             }
         }
         for (MonHoc mon : this.dstr) {
-            if (mon.equals(m) == true) {
+            if (mon.id.equals(m.id) == true) {
                 return true;
             }
         }

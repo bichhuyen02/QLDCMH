@@ -66,14 +66,14 @@ public class QLDC {
             qlgv.themGV(gv1, gv3, gv2);
 
             //Tạo đề cương
-            DeCuong dc1 = new DeCuong("CSLTCQ",
-                    "Biet cach xay dung thuat toan cho cac bai giai thong thuong",
-                    "Van dung cac cau lenh dieu khien thich hop khi viet chuong trinh",
-                    hdt1, gv1, mh1);
-            DeCuong dc2 = new DeCuong("CSLTTX",
-                    "Biet cach xay dung thuat toan cho cac bai giai thong thuong",
-                    "Van dung cac cau lenh dieu khien thich hop khi viet chuong trinh",
-                    hdt2, gv2, mh1);
+//            DeCuong dc1 = new DeCuong("CSLTCQ",
+//                    "Biet cach xay dung thuat toan cho cac bai giai thong thuong",
+//                    "Van dung cac cau lenh dieu khien thich hop khi viet chuong trinh",
+//                    hdt1, gv1, mh1);
+//            DeCuong dc2 = new DeCuong("CSLTTX",
+//                    "Biet cach xay dung thuat toan cho cac bai giai thong thuong",
+//                    "Van dung cac cau lenh dieu khien thich hop khi viet chuong trinh",
+//                    hdt2, gv2, mh1);
 
             DeCuong dc3 = new DeCuong("CNPMCQ",
                     "Biet cach xay dung thuat toan cho cac bai giai",
@@ -101,7 +101,7 @@ public class QLDC {
                     "Biet cach xay dung thuat toan cho cac bai giai thong thuong",
                     "Van dung cac cau lenh dieu khien thich hop khi viet chuong trinh",
                     hdt2, gv3, mh5);
-            qldc.themDC(dc8, dc7, dc6, dc5, dc4, dc3, dc2, dc1);
+            qldc.themDC(dc8, dc7, dc6, dc5, dc4, dc3);
 
             menu.menuMain(qlmh, qldc, qlgv, qlht,qltt);
 //            System.out.println(qlmh.timMHTheoTen("CSLT").getTen());

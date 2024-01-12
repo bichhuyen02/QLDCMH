@@ -111,7 +111,7 @@ public class QLDCM extends QLChung{
         return true;
     }
     
-    public List<DeCuong> thongKe(int n){
+    public List<DeCuong> thongKe(float n){
         List<DeCuong> c = new ArrayList<>();
         for(DeCuong d : dc){
             if(d.getMh().getSoTC()==n){
